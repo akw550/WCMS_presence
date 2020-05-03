@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+<!-- {% block page_title %} Home Page {% endblock %} -->
+
+{% block content %}
+<form method="POST" action="/contact/?id={{row.id}}&method=edit">
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            {% csrf_token %}
+        </div>
+    </div>
+    <div class="form-row">
+      <!-- <div class="form-group col-md-2">
+        <label for="inputEmail4">id</label>
+        <input name="id" type="text" class="form-control" id="inputEmail4" value="{{row.id}}">
+      </div> -->
+      <div class="form-group col-md-6">
+        <label for="inputname">Name</label>
+        <input name="name" type="text" class="form-control" id="inputEmail4" value="{{row.name}}">
+      </div>
+      <!-- <div class="form-group col-md-2">
+        <label for="inputEmail4">RollNo</label>
+        <input name="rollno" type="text" class="form-control" id="inputEmail4" placeholder="Enter Your Name">
+      </div> -->
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Email</label>
+        <input name="email" type="email" class="form-control" id="inputEmail4"  value="{{row.email}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress">Address</label>
+      <input name="address" type="text" class="form-control" id="inputAddress"  value="{{row.address}}">
+    </div>
+    
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputCity">City</label>
+            <input name="city" type="text" class="form-control" id="inputCity" value="{{row.city}}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputZip">Zip</label>
+            <input name="zip" type="text" class="form-control" id="inputZip" value="{{row.zipcode}}">
+        </div>
+    </div>
+    
+    <button name="submit" type="submit" class="btn btn-primary">Update</button>
+  </form>
+  <br><hr><hr>
+
+  
+  {% endblock %}

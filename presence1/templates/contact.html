@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+<!-- {% block page_title %} Home Page {% endblock %} -->
+
+{% block content %}
+<form method="POST" action="/contact/">
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            {% csrf_token %}
+        </div>
+      </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Name</label>
+        <input name="name" type="text" class="form-control" id="inputEmail4" placeholder="Enter Your Name">
+      </div>
+      <!-- <div class="form-group col-md-2">
+        <label for="inputEmail4">RollNo</label>
+        <input name="rollno" type="text" class="form-control" id="inputEmail4" placeholder="Enter Your Name">
+      </div> -->
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Email</label>
+        <input name="email" type="email" class="form-control" id="inputEmail4" placeholder="ak@gmail.com">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress">Address</label>
+      <input name="address" type="text" class="form-control" id="inputAddress" placeholder="p/o box">
+    </div>
+    
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputCity">City</label>
+            <input name="city" type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputZip">Zip</label>
+            <input name="zip" type="text" class="form-control" id="inputZip">
+        </div>
+    </div>
+    
+    <button name="submit" type="submit" class="btn btn-primary">Post</button>
+  </form>
+  <br><hr><hr>
+  {% endblock %}
+  <div class="row d-block">
+     <p> Email: {{ email|default:"no mail" }}</p> 
+     <p> Address: {{ address|default:"no address" }}</p> 
+     <p> City: {{ city|default:"no city" }}</p> 
+     <p>  Zipcode: {{ zipcode|default:"no zipcode" }}</p> 
+  </div>
+  
+  {% block table %}
+  <table class="table  table-bordered table-hover table-responsive-xl">
+    <caption>List of Entries</caption>
+    <thead class="thead-dark text-center">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th> 
+        <th>City</th>
+        <th>ZipCode</th>
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+
+        <tr>
+          <td>{{row.id}}</td>
+          <td>{{row.name}}</td>
+          <td>{{row.email}}</td>
+          <td>{{row.address}}</td>
+          <td>{{row.city}}</td>
+          <td>{{row.zipcode}}</td>
+          <td class="btn-outline-dark"><a href="/contact/?id={{row.id}}&method=edit">Edit</a></td>
+          <td class="btn-outline-dark btn-xs"><a href="/contact/?id={{row.id}}&method=delete">Delete</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+  </table>
+  {% endblock %}
